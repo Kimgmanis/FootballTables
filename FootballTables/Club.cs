@@ -36,7 +36,7 @@ namespace FootballTables
         }
 
         // Prints Club
-        public void PrintClubInfo()
+        public void printClubInfo()
         {
             Console.WriteLine("Abbreviation: " + this.abbreviation);
             Console.WriteLine("Full Club name: " + this.fullClubName);
@@ -44,7 +44,7 @@ namespace FootballTables
             Console.WriteLine("W-Last years champion: " + this.wChamp);
             Console.WriteLine("C-Last years cup winner: " + this.cLast);
             Console.WriteLine("P-Promoted team: " + this.pTeam);
-            Console.WriteLine("R-Relegated team: " + this.pTeam);
+            Console.WriteLine("R-Relegated team: " + this.pTeam + "\n");
         }
     }
 }

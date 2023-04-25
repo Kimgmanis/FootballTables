@@ -15,11 +15,16 @@ namespace FootballTables
     {
         // var List
         List<League> leagues;
+        List<Club> clubs;
 
         // League type Logger Constructor
         public Logger(List<League> leagues)
         {
             this.leagues = leagues;
+        }
+        public Logger(List<Club> clubs)
+        {
+            this.clubs = clubs;
         }
 
         // Reads league list data from setup.csv
@@ -41,8 +46,28 @@ namespace FootballTables
                 csv.Dispose();
             }
         }
+        
+        // Reads league list data from teams.csv
+        public void readTeams() 
+        {
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = false,
+            };
+            StreamReader readerSetup = new StreamReader("teams.csv");
+            CsvReader csv = new CsvReader(readerSetup, config);
+            {
+                csv.Read();
+                while (csv.Read())
+                {
+                    var records = csv.GetRecord<Club>();
+                    clubs.Add(records);
+                }
+                csv.Dispose();
+            }
+        }
 
-        // Writes league list data to setup.csv
+        // Writes League List data to setup.csv
         public void writeLeagueSetup()
         {
             // Write to a file.
@@ -53,7 +78,20 @@ namespace FootballTables
                 csv.Flush(); // Data is written from the writer buffer to the stream.
             }
         }
+        
+        // Writes Club list data to teams.csv
+        public void writeTeam()
+        {
+            // Write to a file.
+            StreamWriter writerSetup = new StreamWriter("team.csv");
+            CsvWriter csv = new CsvWriter(writerSetup, CultureInfo.InvariantCulture);
+            {
+                csv.WriteRecords(clubs);
+                csv.Flush(); // Data is written from the writer buffer to the stream.
+            }
+        }
 
+        /* untested
         // Updates the League List in setup.csv
         public void updateLeagueSetup() 
         {
@@ -70,7 +108,7 @@ namespace FootballTables
                 csv.WriteRecords(leagues);
                 csv.Flush();
             }
-        }
+        } */
 
         // Prints League's in list
         public void printLeagueList()
@@ -81,5 +119,22 @@ namespace FootballTables
                 league.printLeagueInfo();
             }
         }
+        
+        // Prints Club's in list
+        public void printClubList()
+        {
+            for (int i = 0; i < clubs.Count; i++)
+            {
+                var club = clubs[i];
+                club.printClubInfo();
+            }
+        }
+
+
+        public void roundx()
+        {
+
+        }
+
     }
 }
