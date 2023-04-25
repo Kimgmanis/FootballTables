@@ -1,13 +1,7 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FootballTables
 {
@@ -83,7 +77,7 @@ namespace FootballTables
         public void writeTeam()
         {
             // Write to a file.
-            StreamWriter writerSetup = new StreamWriter("team.csv");
+            StreamWriter writerSetup = new StreamWriter("teams.csv");
             CsvWriter csv = new CsvWriter(writerSetup, CultureInfo.InvariantCulture);
             {
                 csv.WriteRecords(clubs);
@@ -130,7 +124,7 @@ namespace FootballTables
             }
         }
 
-
+        // round x processing
         public void roundx()
         {
 

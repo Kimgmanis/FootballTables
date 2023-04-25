@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CsvHelper.Configuration.Attributes;
+﻿using CsvHelper.Configuration.Attributes;
 
 namespace FootballTables
 {
@@ -35,7 +30,7 @@ namespace FootballTables
             this.rTeam = rTeam;
         }
 
-        // Prints Club
+        // Prints Club to console
         public void printClubInfo()
         {
             Console.WriteLine("Abbreviation: " + this.abbreviation);

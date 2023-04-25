@@ -1,11 +1,5 @@
-﻿using CsvHelper.Configuration;
-using CsvHelper.Configuration.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CsvHelper.Configuration.Attributes;
+
 
 namespace FootballTables
 {
@@ -34,7 +28,7 @@ namespace FootballTables
             this.numOfPosLowerLeague = numOfPosLowerLeague;
         }
 
-        // Prints League
+        // Prints League to console
         public void printLeagueInfo()
         {
             Console.WriteLine("League Name: " + this.leagueName);
