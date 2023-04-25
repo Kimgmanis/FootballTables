@@ -3,18 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper.Configuration.Attributes;
 
 namespace FootballTables
 {
     internal class Club
     {
+        [Index(0)]
         public String abbreviation { get; set; }
+        [Index(1)]
         public String fullClubName { get; set; }
+        [Index(2)]
         public int specialRanking { get; set; }
-        public String wChamp { get; set; }
-        public String cLast { get; set; }
-        public String pTeam { get; set; }
-        public String rTeam { get; set; }
+        [Index(3)]
+        public String wChamp { get; set; } // Last years champion
+        [Index(4)]
+        public String cLast { get; set; } // Last years cup winner
+        [Index(5)]
+        public String pTeam { get; set; } // Promoted team
+        [Index(6)]
+        public String rTeam { get; set; } // Relegated team
 
         public Club(String abbreviation, String fullClubName, int specialRanking, string wChamp, string cLast, String pTeam, String rTeam) 
         {
@@ -27,6 +35,7 @@ namespace FootballTables
             this.rTeam = rTeam;
         }
 
+        // Prints Club
         public void PrintClubInfo()
         {
             Console.WriteLine("Abbreviation: " + this.abbreviation);

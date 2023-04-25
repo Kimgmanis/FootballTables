@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CsvHelper.Configuration;
+using CsvHelper.Configuration.Attributes;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +11,17 @@ namespace FootballTables
 {
     internal class League
     {
+        [Index(0)]
         public String leagueName { get; set; }
+        [Index(1)]
         public int numOfPosChampionsLeague { get; set; }
+        [Index(2)]
         public int numOfPosEuLeague { get; set; }
+        [Index(3)]
         public int numOfPosConfLeague { get; set; }
+        [Index(4)]
         public int numOfPosUpperLeague { get; set; }
+        [Index(5)]
         public int numOfPosLowerLeague { get; set; }
 
         public League(String leagueName, int numOfPosChampionsLeague, int numOfPosEuLeague, int numOfPosConfLeague, int numOfPosUpperLeague, int numOfPosLowerLeague)
@@ -25,6 +34,7 @@ namespace FootballTables
             this.numOfPosLowerLeague = numOfPosLowerLeague;
         }
 
+        // Prints League
         public void printLeagueInfo()
         {
             Console.WriteLine("League Name: " + this.leagueName);
