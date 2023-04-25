@@ -29,6 +29,7 @@ leagueLogger.printLeagueList();
 
 // Teams
 Club club1 = new("abbreviation", "club1", 0, "unknown", "last", "pteam", "rteam");
+Club FCN = new("F-C-N", "FC Nordsjaelland", 0, "unknown", "last", "pteam", "rteam");
 
 clubs.Add(club1);
 
