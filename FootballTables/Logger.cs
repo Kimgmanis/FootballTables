@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
+using System.IO;
 
 
 namespace FootballTables
@@ -28,7 +29,7 @@ namespace FootballTables
             {
                 HasHeaderRecord = false,
             };
-            StreamReader readerSetup = new StreamReader("setup.csv");
+            StreamReader readerSetup = new StreamReader(@"test/setup.csv");
             CsvReader csv = new CsvReader(readerSetup, config);
             {
                 csv.Read();
@@ -48,7 +49,7 @@ namespace FootballTables
             {
                 HasHeaderRecord = false,
             };
-            StreamReader readerSetup = new StreamReader("teams.csv");
+            StreamReader readerSetup = new StreamReader(@"test/teams.csv");
             CsvReader csv = new CsvReader(readerSetup, config);
             {
                 csv.Read();
@@ -64,20 +65,20 @@ namespace FootballTables
         // Writes League List data to setup.csv
         public void writeLeagueSetup()
         {
-            // Write to a file.
-            StreamWriter writerSetup = new StreamWriter("setup.csv");
-            CsvWriter csv = new CsvWriter(writerSetup, CultureInfo.InvariantCulture);
-            {
-                csv.WriteRecords(leagues);
-                csv.Flush(); // Data is written from the writer buffer to the stream.
-            }
+                // Write to setup.csv
+                StreamWriter writerSetup = new StreamWriter(@"test/setup.csv");
+                CsvWriter csv = new CsvWriter(writerSetup, CultureInfo.InvariantCulture);
+                {
+                    csv.WriteRecords(leagues);
+                    csv.Flush(); // Data is written from the writer buffer to the stream.
+                }
         }
         
         // Writes Club list data to teams.csv
         public void writeTeam()
         {
-            // Write to a file.
-            StreamWriter writerSetup = new StreamWriter("teams.csv");
+            // Write to teams.csv
+            StreamWriter writerSetup = new StreamWriter(@"test/teams.csv");
             CsvWriter csv = new CsvWriter(writerSetup, CultureInfo.InvariantCulture);
             {
                 csv.WriteRecords(clubs);
@@ -95,7 +96,7 @@ namespace FootballTables
                 // Don't write the header again.
                 HasHeaderRecord = false,
             };
-            using (var stream = File.Open("setup.csv", FileMode.Append))
+            using (var stream = File.Open("test/setup.csv", FileMode.Append))
             using (var writer = new StreamWriter(stream))
             using (var csv = new CsvWriter(writer, config))
             {

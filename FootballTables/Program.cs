@@ -9,13 +9,18 @@ Logger leagueLogger = new Logger(leagues);
 Logger clubLogger = new Logger(clubs);
 
 // Project Setup
-if (File.Exists(@"setup.csv")) // if setup.csv exists
+if (File.Exists(@"test/setup.csv")) // if setup.csv exists
 {
     // Reads setup.csv and prints League's List to console
     leagueLogger.readLeagueSetup();
     leagueLogger.printLeagueList();
-}else if (!File.Exists(@"setup.csv")) // if !setup exists
+}
+else if (!File.Exists(@"test/setup.csv")) // if !setup exists
 {
+    // creates directory /test/ if it doesn't exist
+    DirectoryInfo DIR = new DirectoryInfo(@"test");
+    DIR.Create();
+
     // Leagues
     League superLigaen = new League("Super Ligaen", 1, 0, 0, 0, 2);
     League nordicBetLigaen = new League("NordicBet Ligaen", 0, 2, 2, 2, 2);
@@ -25,14 +30,14 @@ if (File.Exists(@"setup.csv")) // if setup.csv exists
     // Writes leagues list into csv file
     leagueLogger.writeLeagueSetup();
     leagueLogger.printLeagueList();
-    Console.WriteLine("setup.csv created");
+    Console.WriteLine("setup.csv created\n");
 }
-if(File.Exists(@"teams.csv")) // if teams.csv exists
+if(File.Exists(@"test/teams.csv")) // if teams.csv exists
 {
     // Reads teams.csv and prints to console
     clubLogger.readTeams();
     clubLogger.printClubList();
-} else if (!File.Exists(@"teams.csv")) // if !teams.csv exists
+} else if (!File.Exists(@"test/teams.csv")) // if !teams.csv exists
 {
     // Teams - superligaen
     Club fcn = new("F-C-N", "Football Club Nordsjaelland", 0, "unknown", "last", "pteam", "rteam");
@@ -87,5 +92,5 @@ if(File.Exists(@"teams.csv")) // if teams.csv exists
     // Writes club objects to teams.csv
     clubLogger.writeTeam();
     clubLogger.printClubList();
-    Console.WriteLine("teams.csv created");
+    Console.WriteLine("teams.csv created\n");
 }
