@@ -124,12 +124,5 @@ namespace FootballTables
                 club.printClubInfo();
             }
         }
-
-        // round x processing
-        public void roundx()
-        {
-
-        }
-
     }
 }

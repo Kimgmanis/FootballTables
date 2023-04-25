@@ -50,5 +50,11 @@ namespace FootballTables
             Console.WriteLine("Points achieved: ");
             Console.WriteLine("Current winning streak: ");
         }
+
+        // round x processing
+        public void roundx(string clubX, string clubY)
+        {
+
+        }
     }
 }
