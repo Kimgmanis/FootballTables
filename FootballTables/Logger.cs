@@ -97,25 +97,6 @@ namespace FootballTables
             }
         }
 
-        /* untested
-        // Updates the League List in setup.csv
-        public void updateLeagueSetup() 
-        {
-            // Append to the file.
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                // Don't write the header again.
-                HasHeaderRecord = false,
-            };
-            using (var stream = File.Open("test/setup.csv", FileMode.Append))
-            using (var writer = new StreamWriter(stream))
-            using (var csv = new CsvWriter(writer, config))
-            {
-                csv.WriteRecords(leagues);
-                csv.Flush();
-            }
-        } */
-
         // Prints League's in list to Console
         public void printLeagueList()
         {
@@ -133,6 +114,23 @@ namespace FootballTables
             {
                 var club = clubs[i];
                 club.printClubInfo();
+            }
+        }
+
+        public void roundStart()
+        {
+            // checks if rounds already exist
+            if (!File.Exists("@test/round1.csv"))
+            {
+                // Creates round#.csv
+                string directoryPath = @"test";
+                for (var i = 0; i < 2; i++)
+                {
+                    int fileNumber = +1;
+                    string fileName = "round" + fileNumber.ToString() + ".csv";
+                    string filePath = Path.Combine(directoryPath, fileName);
+                    File.Create(filePath).Close();
+                }
             }
         }
     }

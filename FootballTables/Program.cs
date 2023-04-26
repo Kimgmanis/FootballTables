@@ -16,7 +16,7 @@ if (File.Exists(@"test/setup.csv")) // if setup.csv exists
 {
     // Reads setup.csv and prints League's List to console
     leagueLogger.readLeagueSetup();
-    leagueLogger.printLeagueList();
+    // leagueLogger.printLeagueList();
 }
 else if (!File.Exists(@"test/setup.csv")) // if !setup exists
 {
@@ -27,25 +27,26 @@ else if (!File.Exists(@"test/setup.csv")) // if !setup exists
     // Leagues
     League superLigaen = new League("Super Ligaen", 1, 0, 0, 0, 2);
     League nordicBetLigaen = new League("NordicBet Ligaen", 0, 2, 2, 2, 2);
-
     // Adds to leagues List
     leagues.Add(superLigaen);
     leagues.Add(nordicBetLigaen);
 
     // Writes leagues list into csv file
     leagueLogger.writeLeagueSetup();
-    leagueLogger.printLeagueList();
+    // leagueLogger.printLeagueList();
     Console.WriteLine("setup.csv created\n");
 }
 if(File.Exists(@"test/teams.csv")) // if teams.csv exists
 {
     // Reads teams.csv and prints to console
     clubLogger.readTeams();
-    clubLogger.printClubList();
+    // clubLogger.printClubList();
 
     // current standings
-    standings.AddClub(clubs);
-    standings.DisplayTable();
+    standings.AddClubsToCurrentStandings(clubs);
+
+    // Prints console table
+    standings.PrintCurrentStandings();
 
 } 
 else if (!File.Exists(@"test/teams.csv")) // if !teams.csv exists
@@ -102,6 +103,6 @@ else if (!File.Exists(@"test/teams.csv")) // if !teams.csv exists
     clubs.Add(nfc);
     // Writes club objects to teams.csv
     clubLogger.writeTeam();
-    clubLogger.printClubList();
+    // clubLogger.printClubList();
     Console.WriteLine("teams.csv created\n");
 }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ConsoleTables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,7 +61,7 @@ namespace FootballTables
         public CurrentStandings(){}
 
         // Prints current standings to console
-        public void printCurrentStandings()
+        public void PrintCurrentStanding()
         {
             Console.WriteLine("Position in the table: " + this.TablePosition);
             Console.WriteLine("Abbreviation: " + this.Abbreviation);
@@ -75,13 +77,14 @@ namespace FootballTables
             Console.WriteLine("Current winning streak: " + this.WinningStreak);
         }
 
-        public void AddClub(List<Club> club)
+
+        public void AddClubsToCurrentStandings(List<Club> club)
         {
+            // loops through every club object in List
             for(int i = 0; i < club.Count; i++)
             {
-                CurrentStandings standings = new CurrentStandings(club[i]);
-                standings.printCurrentStandings();
-                // standings.Add(club[i]);
+                CurrentStandings standings = new CurrentStandings(club[i]); // converts Club.cs type to CurrentStanding.cs object type
+                currentStandings.Add(standings); // adds converted Club object to currentStandings List
             }
         }
 
@@ -107,15 +110,23 @@ namespace FootballTables
             currentStandings = currentStandings.OrderBy(x => x.FullClubName).ToList();
         }
 
-        public void DisplayTable()
+        public void PrintCurrentStandings()
         {
-            Console.WriteLine("Club\t\tPoints\tGD\tGF\tGA");
-
-            foreach (var currentStandings in currentStandings)
+            var table = new ConsoleTable("#", "Abbreviation", "Full Club Name", "Game Played",
+                "W", "D", "L", "Goal For", "Goal Against", "Goal Difference", "Total Points", "Streak");
+            foreach(var currentStandings in currentStandings)
             {
-                Console.WriteLine($"{currentStandings.FullClubName}\t\t{currentStandings.Points}\t{currentStandings.GoalDifference}\t{currentStandings.GoalsFor}\t{currentStandings.GoalsAgainst}");
-            }
-        }
+                /*
+                // Calculate remaining stats based on club data
+                int gp = currentStandings.GamesWon + currentStandings.GamesLost;
+                int gd = currentStandings.GoalsFor - currentStandings.GoalsAgainst;
+                int pts = currentStandings.GamesWon * 3;*/
 
+                table.AddRow(currentStandings.TablePosition, currentStandings.Abbreviation, currentStandings.FullClubName, currentStandings.GamesPlayed,
+                    currentStandings.GamesWon, currentStandings.GamesDrawn, currentStandings.GamesLost, currentStandings.GoalsFor, currentStandings.GoalsAgainst,
+                    currentStandings.GoalDifference, currentStandings.Points, currentStandings.WinningStreak);
+            }
+            table.Write(Format.Default);
+        }
     }
 }
