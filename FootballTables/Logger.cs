@@ -9,8 +9,8 @@ namespace FootballTables
     internal class Logger
     {
         // var List
-        List<League> leagues;
-        List<Club> clubs;
+        public List<League> leagues;
+        public List<Club> clubs;
 
         // League type Logger Constructor
         public Logger(List<League> leagues)

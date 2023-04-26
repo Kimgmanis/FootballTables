@@ -8,6 +8,9 @@ List<Club> clubs = new List<Club>();
 Logger leagueLogger = new Logger(leagues);
 Logger clubLogger = new Logger(clubs);
 
+// Current Standings
+var standings = new CurrentStandings();
+
 // Project Setup
 if (File.Exists(@"test/setup.csv")) // if setup.csv exists
 {
@@ -24,9 +27,11 @@ else if (!File.Exists(@"test/setup.csv")) // if !setup exists
     // Leagues
     League superLigaen = new League("Super Ligaen", 1, 0, 0, 0, 2);
     League nordicBetLigaen = new League("NordicBet Ligaen", 0, 2, 2, 2, 2);
+
     // Adds to leagues List
     leagues.Add(superLigaen);
     leagues.Add(nordicBetLigaen);
+
     // Writes leagues list into csv file
     leagueLogger.writeLeagueSetup();
     leagueLogger.printLeagueList();
@@ -37,6 +42,11 @@ if(File.Exists(@"test/teams.csv")) // if teams.csv exists
     // Reads teams.csv and prints to console
     clubLogger.readTeams();
     clubLogger.printClubList();
+
+    // current standings
+    standings.AddClub(clubs);
+    standings.DisplayTable();
+
 } 
 else if (!File.Exists(@"test/teams.csv")) // if !teams.csv exists
 {
