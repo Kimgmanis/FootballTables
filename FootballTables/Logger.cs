@@ -11,6 +11,7 @@ namespace FootballTables
         // var List
         public List<League> leagues;
         public List<Club> clubs;
+        public List<Round> Rounds;
 
         // League type Logger Constructor
         public Logger(List<League> leagues)
@@ -20,6 +21,10 @@ namespace FootballTables
         public Logger(List<Club> clubs)
         {
             this.clubs = clubs;
+        }
+        public Logger(List<Round> rounds)
+        {
+            this.Rounds = rounds;
         }
 
         // Csv Configuration
@@ -69,6 +74,42 @@ namespace FootballTables
                 readerTeams.Dispose();
             }
         }
+        
+        // Reads round1.csv
+        public void readRound1() 
+        {
+            // StreamReader
+            StreamReader readerRounds = new StreamReader(@"test/round1.csv");
+            // Csv reader
+            CsvReader csv = new CsvReader(readerRounds, configH);
+            {
+                csv.Read();
+                while (csv.Read())
+                {
+                    var records = csv.GetRecord<Round>();
+                    Rounds.Add(records);
+                }
+                csv.Dispose();
+                readerRounds.Dispose();
+            }
+        }
+        public void readRound2() 
+        {
+            // StreamReader
+            StreamReader readerRounds = new StreamReader(@"test/round2.csv");
+            // Csv reader
+            CsvReader csv = new CsvReader(readerRounds, configH);
+            {
+                csv.Read();
+                while (csv.Read())
+                {
+                    var records = csv.GetRecord<Round>();
+                    Rounds.Add(records);
+                }
+                csv.Dispose();
+                readerRounds.Dispose();
+            }
+        }
 
         // Writes League List data to setup.csv
         public void writeLeagueSetup()
@@ -94,6 +135,30 @@ namespace FootballTables
                 csv.WriteRecords(clubs);
                 csv.Flush(); // Data is written from the writer buffer to the stream.
                 writerTeams.Close();
+            }
+        }
+        
+        // Writes Round list data to round.csv
+        public void writeRound1()
+        {
+            // Write to Round.csv
+            StreamWriter writerRounds = new StreamWriter(@"test/round1.csv");
+            CsvWriter csv = new CsvWriter(writerRounds, config);
+            {
+                csv.WriteRecords(Rounds);
+                csv.Flush(); // Data is written from the writer buffer to the stream.
+                writerRounds.Close();
+            }
+        }
+        public void writeRound2()
+        {
+            // Write to Round.csv
+            StreamWriter writerRounds = new StreamWriter(@"test/round2.csv");
+            CsvWriter csv = new CsvWriter(writerRounds, config);
+            {
+                csv.WriteRecords(Rounds);
+                csv.Flush(); // Data is written from the writer buffer to the stream.
+                writerRounds.Close();
             }
         }
 
