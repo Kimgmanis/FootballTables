@@ -22,15 +22,23 @@ namespace FootballTables
             this.clubs = clubs;
         }
 
+        // Csv Configuration
+        CsvConfiguration configH = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            HasHeaderRecord = false,
+        };
+        CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+
+        };
+
         // Reads league list data from setup.csv
         public void readLeagueSetup() 
         {
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HasHeaderRecord = false,
-            };
+            // StreamReader
             StreamReader readerSetup = new StreamReader(@"test/setup.csv");
-            CsvReader csv = new CsvReader(readerSetup, config);
+            // Csv Reader
+            CsvReader csv = new CsvReader(readerSetup, configH);
             {
                 csv.Read();
                 while (csv.Read())
@@ -39,18 +47,17 @@ namespace FootballTables
                     leagues.Add(records);
                 }
                 csv.Dispose();
+                readerSetup.Close();
             }
         }
         
         // Reads league list data from teams.csv
         public void readTeams() 
         {
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HasHeaderRecord = false,
-            };
-            StreamReader readerSetup = new StreamReader(@"test/teams.csv");
-            CsvReader csv = new CsvReader(readerSetup, config);
+            // StreamReader
+            StreamReader readerTeams = new StreamReader(@"test/teams.csv");
+            // Csv reader
+            CsvReader csv = new CsvReader(readerTeams, configH);
             {
                 csv.Read();
                 while (csv.Read())
@@ -59,18 +66,21 @@ namespace FootballTables
                     clubs.Add(records);
                 }
                 csv.Dispose();
+                readerTeams.Dispose();
             }
         }
 
         // Writes League List data to setup.csv
         public void writeLeagueSetup()
         {
-                // Write to setup.csv
-                StreamWriter writerSetup = new StreamWriter(@"test/setup.csv");
-                CsvWriter csv = new CsvWriter(writerSetup, CultureInfo.InvariantCulture);
+            // Write to setup.csv
+            // StreamWriter
+            StreamWriter writerSetup = new StreamWriter(@"test/setup.csv");
+            CsvWriter csv = new CsvWriter(writerSetup, config);
                 {
                     csv.WriteRecords(leagues);
                     csv.Flush(); // Data is written from the writer buffer to the stream.
+                    writerSetup.Close();
                 }
         }
         
@@ -78,11 +88,12 @@ namespace FootballTables
         public void writeTeam()
         {
             // Write to teams.csv
-            StreamWriter writerSetup = new StreamWriter(@"test/teams.csv");
-            CsvWriter csv = new CsvWriter(writerSetup, CultureInfo.InvariantCulture);
+            StreamWriter writerTeams = new StreamWriter(@"test/teams.csv");
+            CsvWriter csv = new CsvWriter(writerTeams, config);
             {
                 csv.WriteRecords(clubs);
                 csv.Flush(); // Data is written from the writer buffer to the stream.
+                writerTeams.Close();
             }
         }
 
@@ -105,7 +116,7 @@ namespace FootballTables
             }
         } */
 
-        // Prints League's in list
+        // Prints League's in list to Console
         public void printLeagueList()
         {
             for (int i = 0; i < leagues.Count; i++)
@@ -115,7 +126,7 @@ namespace FootballTables
             }
         }
         
-        // Prints Club's in list
+        // Prints Club's in list to Console
         public void printClubList()
         {
             for (int i = 0; i < clubs.Count; i++)

@@ -37,7 +37,8 @@ if(File.Exists(@"test/teams.csv")) // if teams.csv exists
     // Reads teams.csv and prints to console
     clubLogger.readTeams();
     clubLogger.printClubList();
-} else if (!File.Exists(@"test/teams.csv")) // if !teams.csv exists
+} 
+else if (!File.Exists(@"test/teams.csv")) // if !teams.csv exists
 {
     // Teams - superligaen
     Club fcn = new("F-C-N", "Football Club Nordsjaelland", 0, "unknown", "last", "pteam", "rteam");
